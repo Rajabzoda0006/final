@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AXIS — Main</title>
+	<style>
+		:root {
+    --dark: #0A192F;      /* Dark blue */
+    --dark-gray: #1E2A3A;  /* Dark gray */
+    --white: #ffffff;
+    --muted: rgba(255,255,255,0.85);
+    --card: #233554;       /* Darker card background */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: var(--dark-gray);
+    color: var(--white);
+}
+
+/* Header with dark blue */
+header {
+    background: var(--dark);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 2px solid #2A3F5E;
+}
+
+/* AXIS Logo - Bigger & Stylish */
+.brand {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-family: 'Montserrat', 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffffff, #8BA4C9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #8BA4C9;
+}
+
+.cart {
+    margin-left: 12px;
+    font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,25,47,0.9), rgba(30,42,58,0.95));
+}
+
+.hero-inner {
+    position: relative;
+    max-width: 1100px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.6rem;
+    margin: 0 0 12px;
+}
+
+.hero p {
+    margin: 0 0 20px;
+    opacity: 0.95;
+}
+
+.btn-primary {
+    background: var(--white);
+    color: var(--dark);
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #8BA4C9;
+    color: white;
+}
+
+.section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* VIDEO - Fixed Size & Better Display */
+.video-wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto;
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Full Width Background Video */
+.full-width-video-section {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.full-width-video-section video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.6);
+}
+
+.video-text-overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+
+.video-text-overlay h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.video-text-overlay p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.section h2 {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Products Section */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 10px 0 6px;
+    font-size: 1.05rem;
+    color: var(--white);
+}
+
+.price {
+    font-weight: 800;
+    color: #8BA4C9;
+    margin-bottom: 8px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #8BA4C9;
+    color: #8BA4C9;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: #8BA4C9;
+    color: var(--dark);
+}
+
+/* Categories - Men, Women, Kids */
+.categories {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.cat {
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.cat:hover {
+    transform: scale(1.05);
+}
+
+.cat img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cat span {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+/* Gift Card Section */
+.gift {
+    background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+    color: var(--white);
+    padding: 40px 28px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 36px 0;
+    border: 1px solid #2A3F5E;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift .btn {
+    background: var(--white);
+    color: var(--dark);
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: 0.3s;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.gift .btn:hover {
+    background: #8BA4C9;
+    color: white;
+}
+
+/* Watermark Logo - CENTERED */
+.gift::before {
+    content: "AXIS";
+    font-size: 140px;
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.08;
+    color: white;
+    pointer-events: none;
+    letter-spacing: 8px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Keep all text content above watermark */
+.gift h2,
+.gift p,
+.gift a {
+    position: relative;
+    z-index: 2;
+}
+
+/* Newsletter */
+.newsletter {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 28px 0;
+    flex-wrap: wrap;
+}
+
+.newsletter input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #2A3F5E;
+    min-width: 280px;
+    background: var(--card);
+    color: var(--white);
+}
+
+.newsletter input::placeholder {
+    color: var(--muted);
+}
+
+.newsletter button {
+    background: var(--dark);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter button:hover {
+    background: #8BA4C9;
+    color: var(--dark);
+}
+
+/* Footer */
+footer {
+    background: var(--dark);
+    padding: 24px 20px;
+    text-align: center;
+    color: var(--white);
+    border-top: 1px solid #2A3F5E;
+}
+
+footer a {
+    color: #8BA4C9;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 600;
+}
+
+footer a:hover {
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .hero {
+        padding: 70px 16px;
+    }
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    .categories {
+        gap: 10px;
+    }
+    .cat {
+        width: 140px;
+        height: 100px;
+    }
+    .brand {
+        font-size: 28px;
+    }
+    .video-wrap {
+        margin: 20px auto;
+    }
+}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="brand">AXIS</div>
+		<nav>
+			<a href="#">Home</a>
+			<a href="#products">Products</a>
+			<a href="./cart.html">Cart <span class="cart">🛒(0)</span></a>
+		</nav>
+	</header>
+
+	<section class="hero">
+		<div class="hero-inner">
+			<h1>Summer Sale – Up to 50% Off</h1>
+			<p>Refresh your wardrobe with seasonal styles and unbeatable savings. Limited time only.</p>
+			<a class="btn-primary" href="./products.html">SHOP NOW</a>
+		</div>
+	</section>
+
+	<div class="full-width-video-section">
+    <video autoplay muted loop playsinline>
+        <source src="./img/1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-text-overlay">
+        <h2>FEATURED PRODUCTS</h2>
+        <p>Discover the latest fashion trends</p>
+    </div>
+</div>
+
+	<section class="section" id="products">
+		<h2>FEATURED PRODUCTS</h2>
+		<div class="products">
+			<div class="card">
+				<img src="./img/7.jpg" alt="sport wear">
+				<h3>sports wear</h3>
+				<div class="price">$19.99</div>
+				<a class="btn-outline" href="./products.html">View</a>
+			</div>
+			<div class="card">
+				<img src="./img/6.jpg" alt="casual wear">
+				<h3>casual wear</h3>
+				<div class="price">$49.99</div>
+				<a class="btn-outline" href="./products.html">View</a>
+			</div>
+			<div class="card">
+				<img src="./img/8.jpg" alt="Shoes">
+				<h3>Shoes</h3>
+				<div class="price">$79.99</div>
+				<a class="btn-outline" href="./products.html">View</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>SHOP BY CATEGORY</h2>
+		<div class="categories">
+			<div class="cat">
+				<img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800" alt="Men">
+				<span>Men</span>
+			</div>
+			<div class="cat">
+				<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800" alt="Women">
+				<span>Women</span>
+			</div>
+			<div class="cat">
+				<img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800" alt="Kids">
+				<span>Kids</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="gift">
+			<h2>🎁 GIFT CARDS – The perfect gift 🎁</h2>
+			<p>Give the gift of choice. Redeemable online and in-store.</p>
+			<a class="btn" href="#">BUY GIFT CARD</a>
+		</div>
+	</section>
+
+	<section class="section">
+		<div style="text-align:center">
+			<form class="newsletter" onsubmit="event.preventDefault();alert('Thanks for subscribing!')">
+				<input type="email" placeholder="email@example.com" required>
+				<button type="submit">Subscribe</button>
+			</form>
+		</div>
+	</section>
+
+	<footer>
+		<div>
+			<a href="#">Contact</a> |
+			<a href="./about.html">About</a> |
+			<a href="#">Privacy</a>
+		</div>
+		<div style="margin-top:8px">© 2026 AXIS</div>
+	</footer>
+
+</body>
+</html>

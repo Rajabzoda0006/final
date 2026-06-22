@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIS - Fashion Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+
+<div class="logo">AXIS</div>
+
+<ul class="nav-links">
+<li><a href="./index.html">Home</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="./about.html">About Us</a></li>
+</ul>
+
+<div class="nav-icons">
+
+<a href="cart.html" class="cart-link">
+🛒 <span id="cartCount">0</span>
+</a>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div>
+<span class="badge">NEW COLLECTION 2026</span>
+
+<h1>Discover Your Style</h1>
+
+<p>Premium fashion for women, men and children.</p>
+
+<button class="shop-btn">Shop Now</button>
+
+</div>
+
+</section>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search products...">
+</div>
+
+<div class="filters">
+<button class="active" onclick="filterProducts('all',this)">All</button>
+<button onclick="filterProducts('women',this)">Women</button>
+<button onclick="filterProducts('men',this)">Men</button>
+<button onclick="filterProducts('children',this)">Kids</button>
+</div>
+
+<h2 class="section-title">Fashion Collection</h2>
+
+<!-- PRODUCTS (JS GENERATED) -->
+<div class="products" id="products"></div>
+
+<script src="store.js"></script>
+
+</div>
+
+</body>
+</html>

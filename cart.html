@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOGUEX Cart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+background:#0a0616;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+padding:40px 0;
+}
+
+.cart-item{
+display:flex;
+gap:20px;
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+img{
+width:120px;
+border-radius:10px;
+}
+
+button{
+cursor:pointer;
+}
+
+.qty{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.summary{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cart</h1>
+
+<div id="cartItems"></div>
+
+<div class="summary">
+<p>Subtotal: <span id="subtotal">$0</span></p>
+<p>Shipping: <span id="shipping">$10</span></p>
+<p>Tax: <span id="tax">$0</span></p>
+<h2>Total: <span id="total">$0</span></h2>
+
+<button onclick="checkout()">Checkout</button>
+</div>
+
+</div>
+
+<!-- RECEIPT -->
+<div class="modal" id="receiptModal">
+<div style="background:#1a0f2e;padding:20px;border-radius:15px;min-width:300px;">
+<h2>Receipt</h2>
+<div id="receiptItems"></div>
+<h3 id="receiptTotal"></h3>
+<button onclick="closeReceipt()">Close</button>
+</div>
+</div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function save(){
+localStorage.setItem('cart',JSON.stringify(cart));
+}
+
+function render(){
+
+const box=document.getElementById("cartItems");
+box.innerHTML="";
+
+let subtotal=0;
+
+cart.forEach(item=>{
+
+subtotal += item.price * item.quantity;
+
+const div=document.createElement("div");
+div.className="cart-item";
+
+div.innerHTML=`
+<img src="${item.image}">
+<div>
+<h3>${item.name}</h3>
+<p>$${item.price}</p>
+
+<div class="qty">
+<button onclick="minus(${item.id})">-</button>
+<span>${item.quantity}</span>
+<button onclick="plus(${item.id})">+</button>
+</div>
+
+<button onclick="removeItem(${item.id})">Remove</button>
+</div>
+`;
+
+box.appendChild(div);
+
+});
+
+let shipping= cart.length ? 10 : 0;
+let tax=subtotal*0.05;
+let total=subtotal+shipping+tax;
+
+document.getElementById("subtotal").innerText="$"+subtotal.toFixed(2);
+document.getElementById("shipping").innerText="$"+shipping.toFixed(2);
+document.getElementById("tax").innerText="$"+tax.toFixed(2);
+document.getElementById("total").innerText="$"+total.toFixed(2);
+}
+
+function plus(id){
+cart=cart.map(i=>i.id===id?{...i,quantity:i.quantity+1}:i);
+save();render();
+}
+
+function minus(id){
+cart=cart.map(i=>{
+if(i.id===id){
+i.quantity--;
+if(i.quantity<=0){
+return null;
+}
+}
+return i;
+}).filter(Boolean);
+
+save();render();
+}
+
+function removeItem(id){
+cart=cart.filter(i=>i.id!==id);
+save();render();
+}
+
+function checkout(){
+
+if(!cart.length)return alert("Cart empty");
+
+let receipt=document.getElementById("receiptItems");
+receipt.innerHTML="";
+
+let total=0;
+
+cart.forEach(i=>{
+let sum=i.price*i.quantity;
+total+=sum;
+
+receipt.innerHTML+=`
+<p>${i.name} x${i.quantity} = $${sum.toFixed(2)}</p>
+`;
+});
+
+document.getElementById("receiptTotal").innerText="Total: $"+total.toFixed(2);
+
+document.getElementById("receiptModal").style.display="flex";
+
+cart=[];
+save();
+render();
+}
+
+function closeReceipt(){
+document.getElementById("receiptModal").style.display="none";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
